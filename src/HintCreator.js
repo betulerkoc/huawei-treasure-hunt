@@ -15,10 +15,9 @@ const hintData = ["What has 4 legs but can’t walk and has hair at night? You s
   "I stand up and make your day brighter."]
 
 const App = () => {
+  const [imageData, setImageData] = useState([]);
 
   const base64ImagePng = "data:image/png;base64,";
-
-  const [imageData, setImageData] = useState([]);
 
   const filePicker = (callback) => {
     FilePickerManager.showFilePicker(null, (response) => {
@@ -36,7 +35,6 @@ const App = () => {
   const buildBitmap = () => {
     filePicker((response) => {
       let args;
-      let id = 0
       hintData.map((x) => {
         args = {
           content: x,
@@ -49,11 +47,9 @@ const App = () => {
           showImage: false,
           qrLogoBitmap: response.uri
         };
-
         ScanPlugin.Utils.buildBitmap(args)
           .then((res) => {
-            setImageData([...imageData, {
-              id: id + 1,
+            setImageData(prevState => [...prevState, {
               bitmap: res
             }]);
             console.log(imageData.length)
@@ -80,8 +76,10 @@ const App = () => {
 
 };
 
+
 const styles = StyleSheet.create({
 
 });
 
 export default App;
+
