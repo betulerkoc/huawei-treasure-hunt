@@ -3,14 +3,17 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import HintCreator from "./src/HintCreator"
 import WriteQr from "./src/WriteQr"
 import ReadQr from "./src/ReadQr"
+import Game from "./src/Game"
+import Login from "./src/Login"
 
 const App = () => {
 
   return (
     <View>
+      {/* <Login/> */}
+      <Game/>
       {/* <HintCreator /> */}
       <ReadQr/>
     </View>

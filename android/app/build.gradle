@@ -193,6 +193,10 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation ('com.huawei.hms:rn-adapter:5.2.0.300'){
+        exclude group: 'com.facebook.react'
+    } 
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
