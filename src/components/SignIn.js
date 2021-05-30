@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     StyleSheet,
-    TouchableOpacity,
     View,
-    Text,
 } from 'react-native';
 
 import HMSAccount, {
@@ -14,15 +12,8 @@ import HMSAccount, {
     HMSAuthParamConstants,
 } from "@hmscore/react-native-hms-account";
 
-import HMSGameService from "@hmscore/hms-js-gameservice";
 
-
-const App = () => {
-
-    // useEffect(() => {
-    //     HMSGameService.init(NativeModules, DeviceEventEmitter);
-    // }, []);
-
+const SignIn = ({ navigation }) => {
 
     const signIn = () => {
         let signInData = {
@@ -30,7 +21,9 @@ const App = () => {
             authRequestOption: [HMSAuthRequestOptionConstants.ID_TOKEN, HMSAuthRequestOptionConstants.ACCESS_TOKEN, HMSAuthScopeListConstants.EMAIL]
         };
         HMSAccountAuthService.signIn(signInData)
-            .then((response) => { console.log("Sign In -> ", response) })
+            .then((response) => {
+                console.log("Sign In -> ", response)
+            })
             .catch((err) => { console.log("Sign In -> ", err) });
     };
 
@@ -39,7 +32,10 @@ const App = () => {
             accountAuthParams: HMSAuthParamConstants.DEFAULT_AUTH_REQUEST_PARAM_GAME,
         };
         HMSAccountAuthService.silentSignIn(silentSignInData)
-            .then((response) => { console.log("silentSignIn -> ", response) })
+            .then((response) => {
+                console.log("silentSignIn -> ", response)
+                response.displayName ? navigation.navigate('Game') : ""
+            })
             .catch((err) => {
                 if (err.code === "2002") {
                     signIn()
@@ -55,9 +51,9 @@ const App = () => {
 
     return (
         <View>
-            <TouchableOpacity onPress={cancelAuthorization}>
+            {/* <TouchableOpacity onPress={cancelAuthorization}>
                 <Text>Cancel</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <HMSAuthButton
                 style={styles.viewcontainer}
                 colorPolicy={HMSAccount.HUAWEI_ID_AUTH_BUTTON_COLOR_POLICY_RED}
@@ -74,7 +70,7 @@ const styles = StyleSheet.create({
     viewcontainer: {
         marginTop: 20,
         height: 38
-      },
+    },
 });
 
-export default App;
+export default SignIn;

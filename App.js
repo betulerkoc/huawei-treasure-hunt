@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native';
-import WriteQr from "./src/WriteQr"
-import ReadQr from "./src/ReadQr"
-import Game from "./src/Game"
-import Login from "./src/Login"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Game from "./src/pages/Game"
+import Home from "./src/pages/Home"
+import GameSetup from "./src/pages/GameSetup"
 
 const App = () => {
 
+  const Stack = createStackNavigator();
+
   return (
-    <View>
-      {/* <Login/> */}
-      <Game/>
-      {/* <HintCreator /> */}
-      <ReadQr/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Treasure Hunt" component={Home} />
+        <Stack.Screen name="Game" component={Game} />
+        <Stack.Screen name="GameSetup" component={GameSetup} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

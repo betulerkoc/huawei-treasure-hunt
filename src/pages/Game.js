@@ -3,26 +3,29 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity,
   NativeModules,
   DeviceEventEmitter,
   ImageBackground,
-  Image,
   Dimensions
 } from 'react-native';
 import HMSGameService from "@hmscore/hms-js-gameservice";
+import ReadQr from '../components/ReadQr';
 
 const WINDOW = Dimensions.get('window');
 
 const Game = () => {
 
+  const [player, setPlayer] = useState(null);
+
   useEffect(() => {
     HMSGameService.init(NativeModules, DeviceEventEmitter);
+    getCurrentPlayer();
   }, []);
 
   const getCurrentPlayer = () => {
     HMSGameService.getCurrentPlayer()
-      .then((res) => { console.log(JSON.stringify(res)) })
+      .then((res) => { setPlayer(res.data.displayName)
+      console.log("name" +  JSON.stringify(res) ) })
       .catch((err) => { console.log(JSON.stringify(err)) })
   };
 
@@ -35,34 +38,18 @@ const Game = () => {
 
   return (
     <View>
-      <ImageBackground source={require('../game.png')} style={styles.image}>
-        <TouchableOpacity onPress={getCurrentPlayer}>
-          <Text>getCurrentPlayer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={loadAchievementList}>
-          <Text>loadAchievementList</Text>
-        </TouchableOpacity>
+      <ImageBackground source={require('../../game.png')} style={styles.image}>
+        <Text>Hello {player}</Text>
+        <ReadQr />
       </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column"
-  },
   image: {
     width: WINDOW.width,
     height: WINDOW.height
-
-  },
-  text: {
-    color: "white",
-    fontSize: 42,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000a0"
   }
 });
 
