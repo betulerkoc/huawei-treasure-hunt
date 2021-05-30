@@ -4,13 +4,13 @@ import {
     Text,
     View
 } from 'react-native';
-import HintCreator from "../components/HintCreator"
+import ClueCreator from "../components/ClueCreator"
 
 const GameSetup = () => {
 
     return (
         <View>
-            <HintCreator/>
+            <ClueCreator/>
         </View>
     );
 };
