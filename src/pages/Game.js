@@ -40,7 +40,7 @@ const Game = () => {
   return (
     <View>
       <ImageBackground source={require('../../game.png')} style={styles.image}>
-        <Text>Hello {player}</Text>
+        <Text style={styles.greeting}>Hello {player}</Text>
         <ReadQr />
       </ImageBackground>
     </View>
@@ -51,6 +51,12 @@ const styles = StyleSheet.create({
   image: {
     width: WINDOW.width,
     height: WINDOW.height
+  },
+  greeting: {
+    fontSize: 20,
+    alignItems: 'center',
+    marginLeft: 120,
+    padding: 10
   }
 });
 

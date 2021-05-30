@@ -54,7 +54,6 @@ const ClueCreator = () => {
             source={{ uri: base64ImagePng + imageData }} />
         </View>
       }
-
     </View>
   );
 
