@@ -24,8 +24,9 @@ const Game = () => {
 
   const getCurrentPlayer = () => {
     HMSGameService.getCurrentPlayer()
-      .then((res) => { setPlayer(res.data.displayName)
-      console.log("name" +  JSON.stringify(res) ) })
+      .then((res) => {
+        setPlayer(res.data.displayName)
+      })
       .catch((err) => { console.log(JSON.stringify(err)) })
   };
 

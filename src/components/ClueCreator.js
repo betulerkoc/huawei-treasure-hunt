@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import ScanPlugin from '@hmscore/react-native-hms-scan';
 
-const App = () => {
+const ClueCreator = () => {
 
   const [buildBitmapRequest, setBuildBitmapRequest] = useState({
     content: "Type here",
@@ -50,7 +50,7 @@ const App = () => {
       </TouchableOpacity>
       {imageData &&
         <View>
-          <Image style={{ height: 300, width: 300 }}
+          <Image style={{ height: 150, width: 150 }}
             source={{ uri: base64ImagePng + imageData }} />
         </View>
       }
@@ -60,10 +60,9 @@ const App = () => {
 
 };
 
-
 const styles = StyleSheet.create({
 
 });
 
-export default App;
+export default ClueCreator;
 
