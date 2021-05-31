@@ -12,10 +12,10 @@ import ScanPlugin from '@hmscore/react-native-hms-scan';
 const ClueCreator = () => {
 
   const [buildBitmapRequest, setBuildBitmapRequest] = useState({
-    content: "Type here",
+    content: "What has 4 legs but can’t walk and has hair at night? You saw it this morning. The next clue is hiding under it.",
     type: ScanPlugin.ScanType.All,
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
     margin: 1,
     color: -16777216,
     backgroundColor: -1,
@@ -33,11 +33,11 @@ const ClueCreator = () => {
       .catch((e) => console.log(e))
   }
   return (
-    <View>
-      <View style={{ flexDirection: "row" }}>
-        <Text style={{ flex: 1 }}>Barcode Content : </Text>
+    <View style={styles.setup}>
+      <View style={styles.barcode}>
+        <Text style={styles.text}>Barcode Content : </Text>
         <TextInput
-          style={{ flex: 3 }}
+          style={styles.textInput}
           onChangeText={(text) => setBuildBitmapRequest({
             ...buildBitmapRequest,
             content: text
@@ -45,12 +45,12 @@ const ClueCreator = () => {
           value={buildBitmapRequest.content}
         />
       </View>
-      <TouchableOpacity onPress={buildBitmap}>
-        <Text>Build bitmap</Text>
+      <TouchableOpacity onPress={buildBitmap} style={styles.button}>
+        <Text style={styles.buttonText}>Build bitmap</Text>
       </TouchableOpacity>
       {imageData &&
-        <View>
-          <Image style={{ height: 150, width: 150 }}
+        <View style={styles.barcode}>
+          <Image style={styles.image}
             source={{ uri: base64ImagePng + imageData }} />
         </View>
       }
@@ -60,7 +60,39 @@ const ClueCreator = () => {
 };
 
 const styles = StyleSheet.create({
-
+  setup: {
+    padding: 30,
+    flexDirection: "column"
+  },
+  barcode: {
+    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    height: 200,
+    width: 200,
+    justifyContent: 'center',
+  },
+  textInput: {
+    height: 40,
+    width: 200,
+    margin: 12,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'gray'
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "gray",
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 20,
+    marginBottom: 50,
+  },
+  buttonText: {
+    color: 'white'
+  }
 });
 
 export default ClueCreator;
